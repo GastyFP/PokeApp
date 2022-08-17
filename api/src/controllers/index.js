@@ -32,7 +32,33 @@ const getPokemons = async ()=>{
         console.log(err)
     }
 };
+const findPokemon = async (ID)=>{
+    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${ID}`);
+    try{
+        // console.log('ACAAA',response.data)
+            let p = response.data
+            let realPokemon = {
+                id: p.id,
+                image: p.sprites.other['official-artwork'].front_default,
+                name: p.name,
+                type: p.types.lenght > 1 ? [{name:p.types[0].type.name},{name:p.types[1].type.name}]:[{name:p.types[0].type.name}],
+                hp: p.stats[0].base_stat,
+                atk: p.stats[1].base_stat,
+                def: p.stats[2].base_stat,
+                spd: p.stats[5].base_stat,
+                height: p.height,
+                weight: p.weight
+            }
+            return realPokemon;
+    }catch(err){
+        console.log(err)
+    }
+};
+
+
+
 
 module.exports = {
-    getPokemons
+    getPokemons,
+    findPokemon
 }

@@ -2,7 +2,7 @@ const { Router, response } = require('express');
 const router = Router();
 const {Pokemons , Types} = require('../db');
 const axios = require('axios');
-const {getPokemons} = require('../controllers/index')
+const {getPokemons,findPokemon} = require('../controllers/index')
 
 //las actions le van a pegar a /api/XXXX y desde aca nosotros
 // le pegamos a los endpoints con los middle, hacemos lo que tengamos que hacer
@@ -13,8 +13,8 @@ const {getPokemons} = require('../controllers/index')
 
 router.get('/', async (req,res , next)=>{
     try{
-        const pokemonsApi = await getPokemons();
-        const pokemonsDb = await Pokemons.findAll();
+        const pokemonsApi = await getPokemons(); // por que haria primero esto?
+        const pokemonsDb = await Pokemons.findAll();// primero busco, despues todo lo otro
         let allpokemon = [...pokemonsApi,...pokemonsDb]
         const {name} = req.query;
         if(name){
@@ -28,21 +28,29 @@ router.get('/', async (req,res , next)=>{
     }
 })
 
-
-
-
+//
 
 
 router.get('/:idPokemon',async (req,res, next)=>{
     try{
-        const {idPokemon} = req.params;
-        const pokemon = await Pokemons.findByPk(idPokemon);
-        if(pokemon === null)return  res.status(404).send('Pokemon not found *meme crying*')
-        res.status(200).json(pokemon)
+        const {idPokemon} = req.params
+        if(idPokemon.length <= 4){
+            const found = await findPokemon(idPokemon)
+            if(found.length !== 0){
+                return res.status(200).json(found)
+            }
+        }
+        if(idPokemon.length === 36){
+            const found = await Pokemons.findByPk(idPokemon)
+            if(found.length !== 0) return res.status(200).json(found)
+
+            return res.status(404).send('Pokemon not found :S')
+        }
     }catch(err){
         next(err);
     }
 })
+
 
 
 router.post('/',async (req,res, next)=>{ 
