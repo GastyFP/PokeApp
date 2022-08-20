@@ -1,30 +1,28 @@
 const { Router } = require('express');
+const { getTypes } = require('../controllers');
 const router = Router();
 const {Types} = require('../db');
 
-
-//las actions le van a pegar a /api/XXXX y desde aca nosotros
-// le pegamos a los endpoints con los middle, hacemos lo que tengamos que hacer
-// con la info y devolvemos un json(problemente) con la info que se necesita!
-
-router.get('/',(req,res,next)=>{
-    return Types.findAll()
-    .then(types=>{
-        res.status(200).send(types)
-    })
-    .catch(err=>{
-        next(err);
-    })
-})
-// router.get('/', async (req,res,next)=>{
-//     try{
-//         const types = await Types.findAll();
+//practica con promise
+// router.get('/',(req,res,next)=>{
+//     return getTypes()
+//     .then(types=>{
 //         res.status(200).send(types)
-//     }catch(err){
-//         next(err)
-//     }
-
+//     })
+//     .catch(err=>{
+//         next(err);
+//     })
 // })
+
+router.get('/', async (req,res,next)=>{
+    try{
+        const types = await getTypes()
+        res.status(200).send(types)
+    }catch(err){
+        next(err)
+    }
+
+})
 
 //post just for testing
 router.post('/',async (req,res,next)=>{
@@ -37,8 +35,6 @@ router.post('/',async (req,res,next)=>{
     }catch(err){
         next(err)
     }
-
-
 })
 
 

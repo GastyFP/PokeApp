@@ -2,9 +2,9 @@ const {Pokemons, Types} = require('../db');
 const axios = require('axios');
 
 const getPokemons = async ()=>{
-    const {data} = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=10');
-    // const pokemonDb = await Pokemons.findAll();
     try{
+        const {data} = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=40');
+        // const pokemonDb = await Pokemons.findAll();
         const pokePromises = data.results.map(p=>axios.get(p.url))
         //console.log(pokePromises)
         let pokemonApi = Promise.all(pokePromises)//devuelve un array con cada promesa
@@ -20,7 +20,7 @@ const getPokemons = async ()=>{
                     hp: p.stats[0].base_stat,
                     atk: p.stats[1].base_stat,
                     def: p.stats[2].base_stat,
-                    spd: p.stats[5].base_stat,
+                    speed: p.stats[5].base_stat,
                     height: p.height,
                     weight: p.weight
                 })
@@ -32,9 +32,10 @@ const getPokemons = async ()=>{
         console.log(err)
     }
 };
+
 const findPokemon = async (ID)=>{
-    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${ID}`);
     try{
+        const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${ID}`);
         // console.log('ACAAA',response.data)
             let p = response.data
             let realPokemon = {
@@ -56,9 +57,20 @@ const findPokemon = async (ID)=>{
 };
 
 
+const getTypes = async () =>{
+    try{
+        const {data} = await axios.get('https://pokeapi.co/api/v2/type')
+        // console.log(data.results)
+        const types = data.results.map(t=>t.name)
+        return types
+    }catch(err){
+        console.log(err)
+    }
+}
 
 
 module.exports = {
     getPokemons,
-    findPokemon
+    findPokemon,
+    getTypes
 }

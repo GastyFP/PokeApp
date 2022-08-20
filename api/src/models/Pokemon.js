@@ -41,6 +41,10 @@ module.exports = (sequelize) => {
     created:{
       type: DataTypes.BOOLEAN,
       defaultValue: true      //filtrado para creados y no creados
+    },
+    image:{
+      type: DataTypes.STRING,
+      defaultValue: "https://www.laizquierdadiario.cl/IMG/jpg/car12.jpg"
     }
 
   },{

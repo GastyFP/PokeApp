@@ -1,0 +1,33 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+.img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+   }
+.logo {
+    height:100px;
+    width: 300px;
+   }
+.background{
+    margin-top: 10px;
+    height:800px;
+    width: auto;
+}
+
+@media only screen and (max-width: 600px) {
+    .logo {
+        height:50px;
+        width: auto;
+       }
+    .background{
+        margin-top: 10px;
+        height:300px;
+        width: auto;
+    }
+  }

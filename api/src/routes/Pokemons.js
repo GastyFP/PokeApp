@@ -12,45 +12,47 @@ const {getPokemons,findPokemon} = require('../controllers/index')
 //que está en app.js y es el endware que atrapa los err de sequelize
 
 router.get('/', async (req,res , next)=>{
-    try{
-        const pokemonsApi = await getPokemons(); // por que haria primero esto?
-        const pokemonsDb = await Pokemons.findAll();// primero busco, despues todo lo otro
-        let allpokemon = [...pokemonsApi,...pokemonsDb]
+    try{ // if name == true, its a query, so loading all pkmns is useless
         const {name} = req.query;
         if(name){
-            let found = allpokemon.filter(p=>p.name.toLowerCase() === name.toLowerCase())
-            if(found.length !== 0) return res.status(200).json(found)
-            else return res.status(404).send('pokemon not found')
+            const foundApi = await findPokemon(name)
+            if(foundApi) {
+                return res.status(200).json(foundApi)
+            }else{
+                let found = await Pokemons.findOne({where:{name: name}})
+                if(found !== null) return res.status(200).json(found)
+                else{ return res.status(404).send('Pokemon not found')}
+            }
         }
-        res.status(200).json(allpokemon)
+        //no query? ok get me all pkmns
+        const pokemonsApi = await getPokemons();
+        const pokemonsDb = await Pokemons.findAll();
+        let allpokemon = [...pokemonsApi,...pokemonsDb]
+         res.status(200).json(allpokemon);
     }catch(err){
         next(err)
     }
 })
-
-//
-
 
 router.get('/:idPokemon',async (req,res, next)=>{
     try{
         const {idPokemon} = req.params
         if(idPokemon.length <= 4){
             const found = await findPokemon(idPokemon)
-            if(found.length !== 0){
+            if(found){
                 return res.status(200).json(found)
             }
         }
         if(idPokemon.length === 36){
             const found = await Pokemons.findByPk(idPokemon)
             if(found.length !== 0) return res.status(200).json(found)
-
             return res.status(404).send('Pokemon not found :S')
         }
+        return res.status(404).send('Pokemon not found :S')
     }catch(err){
         next(err);
     }
 })
-
 
 
 router.post('/',async (req,res, next)=>{ 
@@ -65,6 +67,7 @@ router.post('/',async (req,res, next)=>{
         if(!name) return res.status(400).send('No se ingreso un nombre');
         const new_pokemon = await Pokemons.create(req.body);
         return res.status(201).json(new_pokemon);
+        //una vez que lo creo, no deberia relacionarle un type?
     }catch(err){
         next(err)
     }  
