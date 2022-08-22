@@ -1,9 +1,10 @@
 import React from 'react'
 import './PokemonCard.scss'
+import {Link} from 'react-router-dom'
 
 const PokemonCard = (props) => {
   return (
-    <div className='card-container' >
+    <div className={`card-container ${props.type}`} >
         <div className="image-container">
           <img src={props.image} alt="PokemonCard" />
         </div>
@@ -16,9 +17,8 @@ const PokemonCard = (props) => {
             </div>
         </div>
         <div className="btn">
-          <button><a>Details</a></button>
+          <Link to={`/pokemons/${props.id}`} ><button>Details</button></Link> 
         </div>
-        
     </div>
   )
 }

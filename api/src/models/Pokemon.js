@@ -26,9 +26,9 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       defaultValue: 1
     },
-    speed:{
+    spd:{
       type: DataTypes.INTEGER,
-      defaultValue: 1
+      defaultValue: 10
     },
     height:{
       type: DataTypes.INTEGER,

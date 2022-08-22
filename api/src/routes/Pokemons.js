@@ -26,8 +26,11 @@ router.get('/', async (req,res , next)=>{
         }
         //no query? ok get me all pkmns
         const pokemonsApi = await getPokemons();
-        const pokemonsDb = await Pokemons.findAll();
+        const pokemonsDb = await Pokemons.findAll({include: {model: Types,through: {attributes: []}
+            }
+        });
         let allpokemon = [...pokemonsApi,...pokemonsDb]
+        // console.log(allpokemon)
          res.status(200).json(allpokemon);
     }catch(err){
         next(err)
@@ -44,7 +47,8 @@ router.get('/:idPokemon',async (req,res, next)=>{
             }
         }
         if(idPokemon.length === 36){
-            const found = await Pokemons.findByPk(idPokemon)
+            const found = await Pokemons.findByPk(idPokemon,{include: {model: Types,through: {attributes: []}}
+        })
             if(found.length !== 0) return res.status(200).json(found)
             return res.status(404).send('Pokemon not found :S')
         }
@@ -57,17 +61,25 @@ router.get('/:idPokemon',async (req,res, next)=>{
 
 router.post('/',async (req,res, next)=>{ 
     try{
-        const {name} = req.body
+        const {name, typeId} = req.body
+        if(!name) return res.status(400).send('No se ingreso un nombre');
+        //Look in DB if exists
         const found = await Pokemons.findOne({
             where:{
                 name : name
             }
         })
         if(found) return res.status(400).send('El nombre del pokemon ya existe');
-        if(!name) return res.status(400).send('No se ingreso un nombre');
+
+        //Doesnt exist? create it
         const new_pokemon = await Pokemons.create(req.body);
-        return res.status(201).json(new_pokemon);
-        //una vez que lo creo, no deberia relacionarle un type?
+
+        //Once i got UUIDV4, i add the types
+        const result = await new_pokemon.setTypes(typeId) // *GUARDA ACA CUANDO CREO EL FORM*
+
+        // return res.status(201).json(new_pokemon);
+        return res.status(201).json(result);
+
     }catch(err){
         next(err)
     }  

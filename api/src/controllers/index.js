@@ -42,7 +42,7 @@ const findPokemon = async (ID)=>{
                 id: p.id,
                 image: p.sprites.other['official-artwork'].front_default,
                 name: p.name,
-                type: p.types.lenght > 1 ? [{name:p.types[0].type.name},{name:p.types[1].type.name}]:[{name:p.types[0].type.name}],
+                type: p.types.length > 1 ? [{name:p.types[0].type.name},{name:p.types[1].type.name}]:[{name:p.types[0].type.name}],
                 hp: p.stats[0].base_stat,
                 atk: p.stats[1].base_stat,
                 def: p.stats[2].base_stat,

@@ -1,14 +1,16 @@
-import {GET_POKEMONS,GET_POKEMON_DETAIL,POST_POKEMON,SEARCH_POKEMON} from '../actions/index'
+import {GET_POKEMONS,GET_POKEMON_DETAIL,POST_POKEMON,SEARCH_POKEMON,GET_TYPES} from '../actions/index'
 
 
 
 const initialState = {
     pokemons:[],
-    pokemonDetail:{}
+    filtered_pokemons:[],
+    pokemonDetail:{},
+    types: [] //vamos a ver para que los uso aca
 }
 
 export default function reducer(state = initialState , action){
-    console.log(action.payload);
+    
     switch(action.type){
         case GET_POKEMONS:
             return {
@@ -23,9 +25,13 @@ export default function reducer(state = initialState , action){
         case SEARCH_POKEMON:
             return{
                 ...state,
-                pokemons: state.pokemons.filter(p=>p.name === action.payload.name) 
+                filtered_pokemons: state.pokemons.filter(p=>p.name === action.payload.name) 
             }
-
+        case GET_TYPES:
+            return{
+                ...state,
+                types: action.payload
+            }
         default: return state
     }
 }

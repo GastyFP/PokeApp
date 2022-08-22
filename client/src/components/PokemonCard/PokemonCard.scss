@@ -5,9 +5,46 @@
     box-shadow: 0px 0px 15px -5px;
     transition: 0.3s;
     animation: ease-in;
-    margin: 0;
+    margin: 10px;
+    // background color para cada tipo de pokemon
+    //ESTAN DENTRO DE CARD CONTEINER GUARDA
+    &.rock {
+        background-color: rgb(148, 81, 81);
+      }
+      &.ghost {
+        background-color: rgb(247, 247, 247);
+      }
+      &.electric {
+        background-color: rgb(255, 255, 161);
+      }
+      &.bug {
+        background-color: #F6D6A7;
+      }
+      &.poison {
+        background-color: #e0a7f6;
+      }
+      &.normal {
+        background-color: #F4F4F4;
+      }
+      &.fairy {
+        background-color: rgba(255, 192, 203, 0.863);
+      }
+      &.fire {
+        background-color: #f8c3ba;
+      }
+      &.grass {
+        background-color:#c9f7c8;
+      }
+      &.water {
+        background-color:#bddbf1;
+      }
+      &.ground {
+        background-color: #b3a083
+      }
+    
 
-}
+
+}//END CARD CONTEINER
 .card-container:hover{
     transform:  scale(1.1);
     box-shadow: 0px 0px 15px 0px;
@@ -47,6 +84,7 @@ h3,p{
     transition: 0.2s;
     margin-bottom: 0.5rem;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .btn button:hover{
@@ -60,4 +98,7 @@ a{
     font-weight: bold;
     cursor: pointer;
 }
+
+
+
 

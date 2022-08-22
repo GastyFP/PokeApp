@@ -3,7 +3,7 @@ import React from 'react'
 import { useState } from 'react'
 import './SearchBar.scss'
 import {useDispatch} from 'react-redux'
-import {searchPokemon} from '../../redux/actions'
+import {getPokemons, searchPokemon} from '../../redux/actions'
 
 
 const SearchBar = () => {
@@ -12,8 +12,8 @@ const SearchBar = () => {
 
 function handleSubmit(e){
     e.preventDefault();
+    if(!search) dispatch(getPokemons())
      dispatch(searchPokemon(search));
-     setSearch('')
 }
 
 const handleChange = (e) =>{
