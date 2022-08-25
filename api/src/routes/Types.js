@@ -26,7 +26,7 @@ router.get('/', async (req,res,next)=>{
         // console.log(loaded);
         if(loaded.length === 0){ //NO
             const result = await Types.bulkCreate(types.map(t=>{return {name: t}}))
-            // console.log(result)
+            //  console.log(result)
             return res.status(200).send(result)
         }else{//YES
             return res.status(304).send('nothing change?')

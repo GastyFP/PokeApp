@@ -2,10 +2,14 @@ const {Pokemons, Types} = require('../db');
 const axios = require('axios');
 
 const getPokemons = async ()=>{
-    try{
-        const {data} = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=40');
-        // const pokemonDb = await Pokemons.findAll();
-        const pokePromises = data.results.map(p=>axios.get(p.url))
+    try{ // no sabia si se podia usar limit=40 en el endpoint asi que me traigo 2 pags
+        let pag1 = await axios.get('https://pokeapi.co/api/v2/pokemon');
+        let pag2 = await axios.get(pag1.data.next);
+        let pokeUrls = [...pag1.data.results,...pag2.data.results];
+
+        // const {data} = await axios.get('https://pokeapi.co/api/v2/pokemon');
+
+        const pokePromises = pokeUrls.map(p=>axios.get(p.url))
         //console.log(pokePromises)
         let pokemonApi = Promise.all(pokePromises)//devuelve un array con cada promesa
         .then(response=>{

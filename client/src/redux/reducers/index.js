@@ -1,12 +1,10 @@
-import {GET_POKEMONS,GET_POKEMON_DETAIL,POST_POKEMON,SEARCH_POKEMON,GET_TYPES} from '../actions/index'
-
-
+import {GET_POKEMONS,GET_POKEMON_DETAIL,POST_POKEMON,SEARCH_POKEMON,GET_TYPES, RESTART_POKEMON, FILTER_BY_TYPE , FILTER_BY_CREATION, FILTER_BY_API} from '../actions/index'
 
 const initialState = {
     pokemons:[],
     filtered_pokemons:[],
     pokemonDetail:{},
-    types: [] //vamos a ver para que los uso aca
+    types: []
 }
 
 export default function reducer(state = initialState , action){
@@ -22,16 +20,54 @@ export default function reducer(state = initialState , action){
                 ...state,
                 pokemonDetail: action.payload
             }
+        case GET_TYPES:
+                return{
+                    ...state,
+                    types: action.payload
+                }
+
         case SEARCH_POKEMON:
             return{
                 ...state,
                 filtered_pokemons: state.pokemons.filter(p=>p.name === action.payload.name) 
             }
-        case GET_TYPES:
+
+        case RESTART_POKEMON:{
             return{
                 ...state,
-                types: action.payload
+                filtered_pokemons:[]
             }
+        }
+
+        case FILTER_BY_TYPE:{
+            //issues with types when created / type when comes from API
+            return{
+                ...state,
+                filtered_pokemons: state.pokemons.filter(p=>
+                    p.created ? p.types.length > 1 ? 
+                    p.types[0].name === action.payload || p.types[1].name === action.payload
+                    :p.types[0].name === action.payload
+                    :
+                    p.type.length > 1 ?
+                    p.type[0].name === action.payload || p.type[1].name === action.payload
+                    :
+                    p.type[0].name === action.payload
+                ) 
+            }
+        }
+        case FILTER_BY_CREATION:{
+            return{
+                ...state,
+                filtered_pokemons: state.pokemons.filter(p=> p.created === true)
+            }
+        }
+        case FILTER_BY_API:{
+            return{
+                ...state,
+                filtered_pokemons: state.pokemons.filter(p=> p.created !== true)
+            }
+        }
+        
         default: return state
     }
 }

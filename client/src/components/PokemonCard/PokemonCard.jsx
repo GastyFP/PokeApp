@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 
 const PokemonCard = (props) => {
   return (
-    <div className={`card-container ${props.type}`} >
+    <div className={`card-container ${props.type[0]}`} >
         <div className="image-container">
           <img src={props.image} alt="PokemonCard" />
         </div>
@@ -13,7 +13,7 @@ const PokemonCard = (props) => {
               <h3>{props.name}</h3>
             </div>
             <div className="card-body">
-              <p>Type: </p><span>{props.type}</span>
+              <p>Type: </p><span>{props.type.map((t)=>t + " ")}</span>
             </div>
         </div>
         <div className="btn">

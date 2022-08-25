@@ -30,9 +30,9 @@ const PokemonDetail = () =>{
             <div className="detail-body">
                 <span className="title">Id: <span className="info">{pokemon.id}</span></span>
                 { pokemon.created ? 
-                <span className="title">Types: <span className="info">{pokemon.types.map(t=>t.name)}</span></span>
+                <span className="title">Types: <span className="info">{pokemon.types.map(t=>t.name + " ")}</span></span>
                   :
-                <span className="title">Types: <span className="info">{pokemon.type.map(t=>t.name)}</span></span>
+                <span className="title">Types: <span className="info">{pokemon.type.map(t=>t.name + " ")}</span></span>
                 }
                 <span className="title">Health: <span className="info">{pokemon.hp}</span></span>
                 <span className="title">Attack: <span className="info">{pokemon.atk}</span></span>

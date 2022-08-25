@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { getTypes } from './redux/actions';
 import { useEffect } from 'react';
 import CreatePokemon from './components/CreatePokemon/CreatePokemon';
+import SideBar from './components/SideBar/SideBar';
 
 
 function App() {

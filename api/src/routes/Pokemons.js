@@ -85,16 +85,19 @@ router.post('/',async (req,res, next)=>{
     }  
 })
 
-router.post('/:idPokemon/type/:idType', async(req,res,next)=>{
-    try{
-        const{idPokemon,idType} = req.params;
-        const pokemon = await Pokemons.findByPk(idPokemon)
-        await pokemon.addType(idType)
-        res.send(pokemon)
-    }catch(err){
-        next(err);
-    }
-})
+
+
+
+// router.post('/:idPokemon/type/:idType', async(req,res,next)=>{
+//     try{
+//         const{idPokemon,idType} = req.params;
+//         const pokemon = await Pokemons.findByPk(idPokemon)
+//         await pokemon.addType(idType)
+//         res.send(pokemon)
+//     }catch(err){
+//         next(err);
+//     }
+// })
 
 
 //No se si los voy a necesitar//

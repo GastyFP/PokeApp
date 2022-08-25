@@ -16,29 +16,34 @@ const Home = () =>{
         dispatch(getPokemons())
     },[])
 
-    pokemons_copy = pokemons.slice(0)   // copy the array with the needed info, when is ok, it loads.
-                                        // if not... loads spinner.
+    // copy the array with the needed info, when is ok, it loads.
+    // if not... loads spinner.
+    pokemons_copy = pokemons.slice(0)  
+
+    console.log(searched_pokemon)
+
 
     //im doing conditional rendering because of the "type" property.
-    //in API its "type". And in DB because of sequelize pluralizing, its "types"
+    //In API the name is "type" but in DB because of sequelize pluralizing, its "types"
     //so i ask if pokemon.created is true 
 
     return(
-        pokemons_copy.length > 0 ? searched_pokemon.length > 0 ? //if u search,it renders the pokmn
+        //if u search,it renders the pokmn
+        pokemons_copy.length > 0 ? searched_pokemon.length > 0 ? 
     <div className="pokemon-conteiner">
         <div className="all-container">
             {
                searched_pokemon.map(p=>(
                 p.created ?
                 <PokemonCard key={p.id} id={p.id} image={p.image} name={p.name} type={p.types.map(t=>t.name)} />:
-                <PokemonCard key={p.id} id={p.id} image={p.image} name={p.name} type={p.types.map(t=>t.name)} />
+                <PokemonCard key={p.id} id={p.id} image={p.image} name={p.name} type={p.type.map(t=>t.name)} />
                )) 
             }
 
         </div>
     </div>
     : //if u dont search, it renders all pokemons
-    <div className="pokemon-conteiner"> 
+    <div className="pokemon-conteiner">
         <div className="all-container">
             { pokemons_copy.map(p=>(
                 p.created ?

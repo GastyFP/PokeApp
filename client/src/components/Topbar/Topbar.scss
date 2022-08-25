@@ -22,8 +22,32 @@
                 width: auto;
                }
         }
-        // .right{
+        
+        
+        .right{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        }
+    }
 
-        // }
+    .home-btn{
+        display: flex;
+        width: 100px;
+        justify-content: center;
+        padding: 0.5rem;
+        background-color: white;
+        border: none;
+        transition: 0.2s;
+        margin-right: 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        
+        &.create{
+            width: 150px;
+        }
+    }
+    .home-btn:hover{
+        background: #FFCB05;
     }
 
