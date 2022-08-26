@@ -1,4 +1,5 @@
-import {GET_POKEMONS,GET_POKEMON_DETAIL,POST_POKEMON,SEARCH_POKEMON,GET_TYPES, RESTART_POKEMON, FILTER_BY_TYPE , FILTER_BY_CREATION, FILTER_BY_API} from '../actions/index'
+import {GET_POKEMONS,GET_POKEMON_DETAIL,POST_POKEMON,SEARCH_POKEMON,GET_TYPES, RESTART_POKEMON, FILTER_BY_TYPE , FILTER_BY_CREATION, FILTER_BY_API , SORT_ALPHABETICAL , SORT_BY_ATTACK} from '../actions/index'
+import {ASCENDANT} from '../../constantes/index'
 
 const initialState = {
     pokemons:[],
@@ -66,6 +67,43 @@ export default function reducer(state = initialState , action){
                 ...state,
                 filtered_pokemons: state.pokemons.filter(p=> p.created !== true)
             }
+        }
+
+        
+        case SORT_ALPHABETICAL:{
+            let ordered_pokemons = [...state.pokemons]
+            ordered_pokemons = ordered_pokemons.sort((a,b)=>{
+                if(a.name < b.name){
+                    return action.payload === ASCENDANT ? -1 : 1
+                }
+                if(a.name > b.name){
+                    return action.payload=== ASCENDANT ? 1 : -1
+                }
+                return 0
+            })
+
+            return{
+                ...state,
+                filtered_pokemons: ordered_pokemons
+            }
+        }
+
+        case SORT_BY_ATTACK:{
+            let ordered_pokemons = [...state.pokemons]
+            ordered_pokemons = ordered_pokemons.sort((a,b)=>{
+                if(a.atk < b.atk){
+                    return action.payload === ASCENDANT ? -1 : 1
+                }
+                if(a.atk > b.atk){
+                    return action.payload=== ASCENDANT ? 1 : -1
+                }
+                return 0
+            })
+            return{
+                ...state,
+                filtered_pokemons: ordered_pokemons
+            }
+
         }
         
         default: return state

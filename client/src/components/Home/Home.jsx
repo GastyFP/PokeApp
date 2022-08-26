@@ -18,14 +18,16 @@ const Home = () =>{
 
     // copy the array with the needed info, when is ok, it loads.
     // if not... loads spinner.
-    pokemons_copy = pokemons.slice(0)  
 
-    console.log(searched_pokemon)
+    //**************ACA QUEDE HACIENDO SPLICE PARA PAGINAR ********/
+    pokemons_copy = pokemons.slice(0,12)
+    searched_pokemon = searched_pokemon.slice(0,12)  
 
+    console.log(searched_pokemon) //checking the array that renders when applying a filter
 
     //im doing conditional rendering because of the "type" property.
-    //In API the name is "type" but in DB because of sequelize pluralizing, its "types"
-    //so i ask if pokemon.created is true 
+    //In API the name is "type" but in DB is "types" because of sequelize pluralizing,
+    //so i ask if p.created is true when rendering all pokemons
 
     return(
         //if u search,it renders the pokmn
@@ -39,7 +41,6 @@ const Home = () =>{
                 <PokemonCard key={p.id} id={p.id} image={p.image} name={p.name} type={p.type.map(t=>t.name)} />
                )) 
             }
-
         </div>
     </div>
     : //if u dont search, it renders all pokemons

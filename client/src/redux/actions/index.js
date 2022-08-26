@@ -7,8 +7,10 @@ export const GET_TYPES = 'GET_TYPES';
 export const RESTART_POKEMON = 'RESTART_POKEMON'; 
 export const FILTER_BY_TYPE = 'FILTER_BY_TYPE';
 export const FILTER_BY_CREATION = 'FILTER_BY_CREATION'
-export const FILTER_BY_API = 'FILTER_BY_API'  
-// export const SORT_POKEMON = 'SORT_POKEMON';
+export const FILTER_BY_API = 'FILTER_BY_API'
+export const SORT_ALPHABETICAL = 'SORT_ALPHABETICAL'
+export const SORT_BY_ATTACK = 'SORT_BY_ATTACK'  
+
 
 
 export const getPokemons = () =>{
@@ -98,6 +100,7 @@ export const postPokemon = (pokemon) =>{
             }
         })
         .catch(err=>{
+            alert(err.response.data)
             console.log(err)
         })
         
@@ -114,7 +117,6 @@ export const filterByType = (typeName) =>{
             })
     }
 }
-
 export const filterByCreation =()=>{
     return function(dispatch){
         dispatch({
@@ -130,6 +132,22 @@ export const filterByApi =()=>{
     }
 }
 
+//hago dispatch o se puede solo retornar un obj con el type?
+//si funciona!
+export const sortAlphabetical = (order)=>{
+    return{
+        type: SORT_ALPHABETICAL,
+        payload: order
+    }
+
+}
+
+export const sortByAttack = (order)=>{
+    return{
+        type: SORT_BY_ATTACK,
+        payload: order
+    }
+}
 
 
 
