@@ -1,11 +1,12 @@
-import {GET_POKEMONS,GET_POKEMON_DETAIL,POST_POKEMON,SEARCH_POKEMON,GET_TYPES, RESTART_POKEMON, FILTER_BY_TYPE , FILTER_BY_CREATION, FILTER_BY_API , SORT_ALPHABETICAL , SORT_BY_ATTACK} from '../actions/index'
+import {GET_POKEMONS,GET_POKEMON_DETAIL,SEARCH_POKEMON,GET_TYPES, RESTART_POKEMON, FILTER_BY_TYPE , FILTER_BY_CREATION, FILTER_BY_API , SORT_ALPHABETICAL , SORT_BY_ATTACK, PAGINATION_RESET,PAGINATION_CHANGE} from '../actions/index'
 import {ASCENDANT} from '../../constantes/index'
 
 const initialState = {
     pokemons:[],
     filtered_pokemons:[],
     pokemonDetail:{},
-    types: []
+    types: [],
+    pagination : 1
 }
 
 export default function reducer(state = initialState , action){
@@ -103,7 +104,18 @@ export default function reducer(state = initialState , action){
                 ...state,
                 filtered_pokemons: ordered_pokemons
             }
-
+        }
+        case PAGINATION_RESET:{
+            return{
+                ...state,
+                pagination: 1
+            }
+        }
+        case PAGINATION_CHANGE:{
+            return{
+                ...state,
+                pagination: action.payload
+            }
         }
         
         default: return state

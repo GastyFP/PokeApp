@@ -1,7 +1,9 @@
 import './CreatePokemon.scss';
-import React, { useEffect, useState } from 'react'
+import React, {useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { postPokemon } from '../../redux/actions';
+import DetailSpinner from "../../components/DetailSpinner/DetailSpinner";
+// import { DEFAULT_CARD_IMG } from '../../constantes';
 
 const CreatePokemon = () => {
     const types = useSelector((state)=>state.types)
@@ -16,18 +18,16 @@ const CreatePokemon = () => {
         height: 1,
         weight: 1,
         image: undefined,
-        type1: [1],
-        type2: [],
+        type1: 1,
+        type2: 0,
         typeId: []
     })
-
-     
 
 ///*******************VALIDATE FUNCTION *******************************/
 
     const validate = (pokemon)=>{
         let errors = {}
-        console.log('ACAAAAAAAAA',pokemon)
+        console.log('VALIDATE',pokemon)
         if(!pokemon.name){
             errors.name = 'Name is required'
         }else{
@@ -67,17 +67,13 @@ const CreatePokemon = () => {
         }
         if(!pokemon.weight){
             errors.weight = 'Weight must be at least 1'
-        }else if(!/^[1-9].{0,2}$/.test(pokemon.spd)){
+        }else if(!/^[1-9].{0,2}$/.test(pokemon.weight)){
         errors.weight = ' Weight must be a positive number between 1 and 999'
         }
-        console.log(pokemon.type2)
-        if(pokemon.type2[0] == 1){
-            errors.type = 'Normal pokemons cant have 2 types. they are just normal'
-        }
-        if(pokemon.type2[0] === pokemon.type1[0]){
+        console.log('TYPE2',pokemon.type2)
+        if(pokemon.type2 === pokemon.type1){
             errors.type = 'The two types must be different'
         }
-
         console.log(errors)
         return errors
     }
@@ -92,16 +88,15 @@ const CreatePokemon = () => {
                 [e.target.name]:e.target.value
             }
         })
-        
         let objError = validate({...newPokemon,[e.target.name]:e.target.value});
         setErrors(objError);
     }
 
     function handleSelect(e){
-        e.preventDefault(); //esto ok?? check
+        e.preventDefault(); 
         setnewPokemon({
             ...newPokemon,
-            [e.target.name]:[e.target.value]
+            [e.target.name]: e.target.value
         })
         let objError = validate({...newPokemon,[e.target.name]:e.target.value});
         setErrors(objError);
@@ -111,7 +106,7 @@ const CreatePokemon = () => {
         e.preventDefault();
         setnewPokemon({
             ...newPokemon,
-            typeId: [...newPokemon.type1,...newPokemon.type2]
+            typeId: [newPokemon.type1,newPokemon.type2]
         })
         dispatch(postPokemon(newPokemon))
     }
@@ -119,26 +114,33 @@ const CreatePokemon = () => {
 
   return (
     types.length > 0 ?
-    <div className='form-container'>
+    <div className='form-box'>
+        <h5>Create your own Pokemon! </h5>
         <form onSubmit={handleSubmit}>
             <label>Name:</label>
             <input type="text" name="name" id="name" value={newPokemon.name} onChange={(e)=>handleChange(e)} />
                 {errors.name && <span style={{color:'red'}} >{errors.name}</span>}
+                <br />
             <label>Health:</label>
             <input type="number" name="hp" id="hp" value={newPokemon.hp} onChange={(e)=>handleChange(e)} />
                 {errors.hp && <span style={{color:'red'}} >{errors.hp}</span>}
+                <br />
             <label>Attack:</label>
             <input type="number" name="atk" id="atk" value={newPokemon.atk} onChange={(e)=>handleChange(e)} />
                 {errors.atk && <span style={{color:'red'}} >{errors.atk}</span>}
+                <br />
             <label>Defense:</label>
             <input type="number" name="def" id="def" value={newPokemon.def} onChange={(e)=>handleChange(e)} />
                 {errors.def && <span style={{color:'red'}} >{errors.def}</span>}
+                <br />
             <label>Speed:</label>
             <input type="number" name="spd" id="spd" value={newPokemon.spd} onChange={(e)=>handleChange(e)} />
                 {errors.spd && <span style={{color:'red'}} >{errors.spd}</span>}
+                <br />
             <label>Height:</label>
             <input type="number" name="height" id="height" value={newPokemon.height} onChange={(e)=>handleChange(e)} />
                 {errors.height && <span style={{color:'red'}} >{errors.height}</span>}
+                <br />
             <label>Weight:</label>
             <input type="number" name="weight" id="weight" value={newPokemon.weight} onChange={(e)=>handleChange(e)} />
                 {errors.weight && <span style={{color:'red'}} >{errors.weight}</span>}
@@ -152,21 +154,23 @@ const CreatePokemon = () => {
                }
             </select>
             <select name="type2" id="type2" onChange={(e)=>handleSelect(e)}>
-                <option value={[]}>---</option>
+                <option value={0}>---</option>
                {
                 types.map(t=>(
                     <option disabled={ newPokemon.type1 == 1 ? true:false} key={t.id} value={t.id}>{t.name}</option>
                 ))
                }
             </select>
+            <br />
                 {errors.type && <span style={{color:'red'}} >{errors.type}</span>}
             <br /><br />
             <label>Select an image for your pokemon via URL!</label>
-            <input type="text" name='image' placeholder='Paste URL here...' onChange={(e)=>handleChange(e)} />
-            <br /><br />
-            <button disabled={newPokemon.name ? Object.keys(errors).length > 0 ? true : false: true} type="submit">Create Pokemon!</button>
+            <p style={{fontSize: '13px', color: 'blue'}}>Copy the link of an image you like here! Be sure the link is correct, otherwise it wont work :S </p>
+            <input type="text" name='image'id='image'placeholder='Paste URL here...' onChange={(e)=>handleChange(e)} />
+            <br />
+            <button className='createBtn' disabled={newPokemon.name ? Object.keys(errors).length > 0 ? true : false: true} type="submit">Create Pokemon!</button>
         </form>
-    </div>: <h1>LOADING...</h1>
+    </div>: <DetailSpinner/>
   )
 }
 

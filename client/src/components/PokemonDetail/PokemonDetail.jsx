@@ -3,6 +3,7 @@ import './PokemonDetail.scss';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getPokemonDetail } from "../../redux/actions";
+import DetailSpinner from "../DetailSpinner/DetailSpinner";
 
 //im doing conditional rendering because of the "type" property.
 //in API its "type". And in DB because of sequelize pluralizing, its "types"
@@ -14,7 +15,7 @@ const PokemonDetail = () =>{
 
     useEffect(() => {
       dispatch(getPokemonDetail(id))
-    }, [])
+    }, [dispatch,id])
     let pokemon = useSelector((state)=>state.pokemonDetail)
          console.log(pokemon)
     return(
@@ -29,7 +30,7 @@ const PokemonDetail = () =>{
             </div>
             <div className="detail-body">
                 <span className="title">Id: <span className="info">{pokemon.id}</span></span>
-                { pokemon.created ? 
+                { pokemon.created  ?
                 <span className="title">Types: <span className="info">{pokemon.types.map(t=>t.name + " ")}</span></span>
                   :
                 <span className="title">Types: <span className="info">{pokemon.type.map(t=>t.name + " ")}</span></span>
@@ -42,7 +43,7 @@ const PokemonDetail = () =>{
                 <span className="title">Weight: <span className="info">{pokemon.weight}</span></span>
             </div>
         </div>
-    </div>: <h1>LOADING</h1>
+    </div>: <DetailSpinner/>
 
 
     )

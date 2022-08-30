@@ -7,7 +7,7 @@ const Landing = () => {
   return (
       <div className='container'>
         <img className='logo' src={pokeImage} alt="pokeIMAGE" />
-        <a href="http://localhost:3000/pokemons"><button> Ingresar</button></a>
+        <a href="http://localhost:3000/pokemons"><button className='landing-btn'> Ingresar</button></a>
         <img className='background' src={backgroundImg} alt="BACKGROUND" />
     </div>
   )

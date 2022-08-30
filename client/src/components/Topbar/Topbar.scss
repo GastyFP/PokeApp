@@ -1,7 +1,7 @@
 
 .topbar{
     width: 100%;
-    height: 80px;
+    height: 100px;
     background-color: gray;
     top: 0;
     z-index: 3;
@@ -49,5 +49,29 @@
     }
     .home-btn:hover{
         background: #FFCB05;
+    }
+
+    .order-container{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 150px;
+        height: 70px;
+        background-color: lightgray;
+        border-radius: 7px;
+        align-items: center;
+        margin-left: 20px;
+    }
+
+    .filter-container{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 200px;
+        height: 90px;
+        background-color: lightgray;
+        border-radius: 7px;
+        align-items: center;
+        margin-left: 20px;
     }
 

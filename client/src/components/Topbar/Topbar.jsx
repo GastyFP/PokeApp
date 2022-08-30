@@ -21,8 +21,12 @@ const Topbar = () => {
     <div className='topbar'>
             <div className="left">
                 <a href={'/pokemons'} className='logo'><img className='logo' src={logo} alt="LOGO" /></a>
-                <PokeFilter/>
-                <PokeOrder/>
+                <div className='filter-container'>
+                  <PokeFilter/>
+                </div>
+                <div className="order-container">
+                  <PokeOrder/>
+                </div>
             </div>
             <div className="right">
             <Link   to={'/pokemons'} ><button className='home-btn' onClick={handleClick}>HOME</button></Link> 

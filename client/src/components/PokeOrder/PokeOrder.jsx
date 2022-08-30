@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './PokeOrder.scss'
 import { useDispatch } from 'react-redux'
-import { sortAlphabetical, sortByAttack } from '../../redux/actions'
+import { sortAlphabetical, sortByAttack,pagReset } from '../../redux/actions'
 import { ASCENDANT,DESCENDANT } from '../../constantes'
 
 
@@ -11,6 +11,7 @@ const PokeOrder = () => {
 
 
   const handleSortAlphabet = ()=>{
+    dispatch(pagReset());
     if(order === ASCENDANT){
       setOrder(DESCENDANT)
     }else setOrder(ASCENDANT)
@@ -18,6 +19,7 @@ const PokeOrder = () => {
   }
 
   const handleSortAttack = ()=>{
+    dispatch(pagReset());
     if(order === ASCENDANT){
       setOrder(DESCENDANT)
     }else setOrder(ASCENDANT)
@@ -25,9 +27,9 @@ const PokeOrder = () => {
   }
 
   return (
-    <div>
+    <div className='order-items'>
       <label>Order Pokemon: </label>
-      <button onClick={handleSortAlphabet}>alphabetically</button>
+      <button onClick={handleSortAlphabet}>A-Z</button>
       <button onClick={handleSortAttack} >Attack Power</button>
     </div>
   )

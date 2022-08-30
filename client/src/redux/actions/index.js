@@ -9,7 +9,9 @@ export const FILTER_BY_TYPE = 'FILTER_BY_TYPE';
 export const FILTER_BY_CREATION = 'FILTER_BY_CREATION'
 export const FILTER_BY_API = 'FILTER_BY_API'
 export const SORT_ALPHABETICAL = 'SORT_ALPHABETICAL'
-export const SORT_BY_ATTACK = 'SORT_BY_ATTACK'  
+export const SORT_BY_ATTACK = 'SORT_BY_ATTACK'
+export const PAGINATION_RESET = 'PAGINATION_RESET'
+export const PAGINATION_CHANGE = 'PAGINATION_CHANGE' 
 
 
 
@@ -82,6 +84,17 @@ export const getTypes = ()=>{
 }
 
 export const postPokemon = (pokemon) =>{
+    let ids = []
+    // console.log('ACTIONS',pokemon)
+    if(pokemon.type2 == 0){
+        console.log('entre IF',pokemon)
+        ids = [pokemon.type1]
+    }else{
+        console.log('entre ELSE',pokemon)
+        ids = [pokemon.type1,pokemon.type2]
+    }
+    console.log('ACTIONS post IF',ids)
+
     return function(){
         axios.post(`http://localhost:3001/api/pokemons`,{
             name: pokemon.name,
@@ -92,7 +105,7 @@ export const postPokemon = (pokemon) =>{
             height: pokemon.height,
             weight: pokemon.weight,
             image: pokemon.image,
-            typeId: [...pokemon.type1,...pokemon.type2]
+            typeId: [...ids]
         })
         .then(response=>{
             if(response.status === 201) {
@@ -146,6 +159,19 @@ export const sortByAttack = (order)=>{
     return{
         type: SORT_BY_ATTACK,
         payload: order
+    }
+}
+
+export const pagReset = () =>{
+    return{
+        type: PAGINATION_RESET
+    }
+}
+
+export const pagChange = (page)=>{
+    return{
+        type: PAGINATION_CHANGE,
+        payload: page
     }
 }
 

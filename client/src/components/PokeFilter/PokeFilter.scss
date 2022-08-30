@@ -1,4 +1,21 @@
-.filter-container{
+.filter-items{
+    display: flex;
+    flex-direction: row;
+}
+.filter-created{
     display: flex;
     flex-direction: column;
+    margin-right: 10px;
+    align-items: center;
+    button{
+        margin-top: 5px;
+    }
+}
+.filter-type{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    select{
+        margin-top: 6px;
+    }
 }

@@ -4,12 +4,12 @@ import Topbar from './components/Topbar/Topbar';
 import Home from './components/Home/Home'
 import Landing from './components/Landing/Landing';
 import PokemonDetail from './components/PokemonDetail/PokemonDetail'
-import PageNotFound from './components/PageNotFound/PageNotFound';
+// import PageNotFound from './components/PageNotFound/PageNotFound';
 import { useDispatch } from 'react-redux';
 import { getTypes } from './redux/actions';
 import { useEffect } from 'react';
 import CreatePokemon from './components/CreatePokemon/CreatePokemon';
-import SideBar from './components/SideBar/SideBar';
+// import SideBar from './components/SideBar/SideBar';
 
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getTypes()) // load all types in DB
-  }, [])
+  }, [dispatch])
   
 
   return (

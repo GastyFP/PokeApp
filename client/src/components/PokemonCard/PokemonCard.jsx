@@ -2,11 +2,12 @@ import React from 'react'
 import './PokemonCard.scss'
 import {Link} from 'react-router-dom'
 
+
 const PokemonCard = (props) => {
   return (
     <div className={`card-container ${props.type[0]}`} >
         <div className="image-container">
-          <img src={props.image} alt="PokemonCard" />
+          <img src={props.image} alt='pokeImg' />
         </div>
         <div className="card-content">
             <div className="card-title">

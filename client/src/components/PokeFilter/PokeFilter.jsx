@@ -1,8 +1,7 @@
 import './PokeFilter.scss';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
-import { filterByType,filterByCreation, filterByApi } from '../../redux/actions';
+import { filterByType,filterByCreation, filterByApi,pagReset } from '../../redux/actions';
 
 
 
@@ -14,23 +13,29 @@ const PokeFilter = () => {
   const handleSelect = (e)=>{
     e.preventDefault();
     // console.log('FILTER',e.target.value)
+    dispatch(pagReset());
     dispatch(filterByType(e.target.value))
   }
   const handleFilterCreated = () =>{
+    dispatch(pagReset());
     dispatch(filterByCreation())
   }
   const handleFilterApi = ()=>{
+    dispatch(pagReset());
     dispatch(filterByApi())
   }
 
 
   return (
         types.length > 0 &&
-    <div className='filter-container'>
-        <label>Filter by Creation or API: </label>
+    <div className='filter-items'>
+      <div className="filter-created">
+        <label>Filter by: </label>
         <button onClick={handleFilterCreated}>Created</button>
         <button onClick={handleFilterApi}>API</button>
-        <label>Filter by Type: </label>
+      </div>
+      <div className="filter-type">
+        <label>Type: </label>
         <select name="typeId" id="typeId" onChange={(e)=>handleSelect(e)}>
             {
               types.map(t=>(
@@ -38,6 +43,7 @@ const PokeFilter = () => {
               ))
             }
         </select>
+      </div>
     </div>
   )
 }

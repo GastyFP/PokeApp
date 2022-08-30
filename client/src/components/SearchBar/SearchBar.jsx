@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import './SearchBar.scss'
 import {useDispatch} from 'react-redux'
-import {getPokemons, searchPokemon, restartPokemon} from '../../redux/actions'
+import {searchPokemon, restartPokemon} from '../../redux/actions'
 
 
 const SearchBar = () => {

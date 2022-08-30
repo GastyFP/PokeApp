@@ -16,9 +16,29 @@
    }
 .background{
     margin-top: 10px;
-    height:800px;
+    height:700px;
     width: auto;
 }
+
+.landing-btn{
+    display: flex;
+    width: 100px;
+    justify-content: center;
+    padding: 0.5rem;
+    background-color: transparent;
+    border-color: #3466AF;
+    transition: 0.2s;
+    margin-top: 1.7rem;
+    border-radius: 5px;
+    font-weight: 700;
+    cursor: pointer;
+
+}
+.landing-btn:hover{
+    background: #FFCB05;
+    color: #3466AF;
+}
+
 
 @media only screen and (max-width: 600px) {
     .logo {
