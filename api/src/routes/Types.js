@@ -3,7 +3,7 @@ const { getTypes } = require('../controllers');
 const router = Router();
 const {Types} = require('../db');
 
-//practica con promise
+//promise
 // router.get('/',(req,res,next)=>{
 //     return getTypes()
 //     .then(types=>{
@@ -13,7 +13,6 @@ const {Types} = require('../db');
 //         next(err);
 //     })
 // })
-
 
 //clearly this works only in development mode, once db is loaded,
 //this always returns 304... in case some new type is added in API
@@ -29,7 +28,7 @@ router.get('/', async (req,res,next)=>{
             //  console.log(result)
             return res.status(200).send(result)
         }else{//YES
-            return res.status(304).send('nothing change?')
+            return res.status(304).send('no changes')
         } 
     }catch(err){
         next(err)
@@ -37,7 +36,6 @@ router.get('/', async (req,res,next)=>{
 
 })
 
-//post just for testing
 router.post('/',async (req,res,next)=>{
     try{
         const {name} = req.body;

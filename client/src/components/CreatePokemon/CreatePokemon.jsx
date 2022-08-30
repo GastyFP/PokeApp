@@ -27,7 +27,7 @@ const CreatePokemon = () => {
 
     const validate = (pokemon)=>{
         let errors = {}
-        console.log('VALIDATE',pokemon)
+        // console.log('VALIDATE',pokemon)
         if(!pokemon.name){
             errors.name = 'Name is required'
         }else{
@@ -39,7 +39,6 @@ const CreatePokemon = () => {
                 }
             }
         }
-
         if(!pokemon.hp){
             errors.hp = 'Health must be at least 1'
         }else if(!/^[1-9].{0,2}$/.test(pokemon.hp)){
@@ -70,11 +69,11 @@ const CreatePokemon = () => {
         }else if(!/^[1-9].{0,2}$/.test(pokemon.weight)){
         errors.weight = ' Weight must be a positive number between 1 and 999'
         }
-        console.log('TYPE2',pokemon.type2)
+        // console.log('TYPE2',pokemon.type2)
         if(pokemon.type2 === pokemon.type1){
             errors.type = 'The two types must be different'
         }
-        console.log(errors)
+        // console.log(errors)
         return errors
     }
 ///*******************END OF VALIDATE *******************************/
@@ -157,6 +156,7 @@ const CreatePokemon = () => {
                 <option value={0}>---</option>
                {
                 types.map(t=>(
+                    // eslint-disable-next-line
                     <option disabled={ newPokemon.type1 == 1 ? true:false} key={t.id} value={t.id}>{t.name}</option>
                 ))
                }

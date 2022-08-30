@@ -2,28 +2,28 @@
 .form-box{
     max-width: 25%;
     height: auto;
-    border: 10px solid #3466AF;
-    margin-top: 30px;
+    border: 5px solid #3466AF;
+    margin-top: 5px;
     margin-left: auto;
     margin-right: auto;
-    padding: 5vw ;
+    padding: 2vw ;
     position:relative; 
-    /* position:relative for .prevBtn and .nextBtn position:absolute; */
 }
 .form-box h5{
     font-size: 30px ;
     text-align: center;
     color: #3466AF;
+    margin: 0;
 }
 
 .form-box input{
     display: block;
-    width: 100%;
+    width: 90%;
     padding: .5rem .8rem .5rem .8rem;
     margin: .9vw 0 ;
     border: 1;
     border-radius: 5px;
-    font-size: 20px;
+    font-size: 15px;
 }
 .createBtn{
     display: inline-block;
@@ -38,12 +38,23 @@
 .createBtn:hover{
     cursor: pointer;
 }
+.createBtn:disabled{
+    cursor: auto;
+    color: white;
+    background-color: red;
+}
+.createBtn:enabled{
+    color: white;
+    background-color: green;
+}
+
+
 
 .form-box label{
     display: block;
     text-align: left;
-    font-size: 20px;
-    margin: 0 0 2vh 0;
+    font-size: 17px;
+    margin: 0 0 0.5vh 0;
 }
 
 .form-box select{
@@ -53,5 +64,5 @@
     margin: .9vw 0 ;
     border: 1;
     border-radius: 5px;
-    font-size: 20px;
+    font-size: 15px;
 }

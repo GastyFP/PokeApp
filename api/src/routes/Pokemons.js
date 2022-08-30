@@ -4,12 +4,8 @@ const {Pokemons , Types} = require('../db');
 const axios = require('axios');
 const {getPokemons,findPokemon} = require('../controllers/index')
 
-//las actions le van a pegar a /api/XXXX y desde aca nosotros
-// le pegamos a los endpoints con los middle, hacemos lo que tengamos que hacer
-// con la info y devolvemos un json(problemente) con la info que se necesita!
 
-//next en este caso lo que hace es pasar el error al siguiente mware
-//que está en app.js y es el endware que atrapa los err de sequelize
+//next is for the catching error endware.
 
 router.get('/', async (req,res , next)=>{
     try{ // if name == true, its a query, so loading all pkmns is useless
@@ -84,29 +80,5 @@ router.post('/',async (req,res, next)=>{
         next(err)
     }  
 })
-
-
-
-
-// router.post('/:idPokemon/type/:idType', async(req,res,next)=>{
-//     try{
-//         const{idPokemon,idType} = req.params;
-//         const pokemon = await Pokemons.findByPk(idPokemon)
-//         await pokemon.addType(idType)
-//         res.send(pokemon)
-//     }catch(err){
-//         next(err);
-//     }
-// })
-
-
-//No se si los voy a necesitar//
-
-// router.put('/',(req,res)=>{
-//     res.status(200).send('put en /characters')
-// })
-// router.delete('/',(req,res)=>{
-//     res.status(200).send('delete en /characters')
-// })
 
 module.exports = router;

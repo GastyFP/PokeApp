@@ -4,11 +4,13 @@ import { useState } from 'react'
 import './SearchBar.scss'
 import {useDispatch} from 'react-redux'
 import {searchPokemon, restartPokemon} from '../../redux/actions'
+import { useHistory } from 'react-router-dom'
 
 
 const SearchBar = () => {
     const [search,setSearch]= useState('')
     let dispatch = useDispatch();
+    let history = useHistory();
 
     useEffect(() => {
     
@@ -21,7 +23,7 @@ const SearchBar = () => {
 function handleSubmit(e){
     e.preventDefault();
     if(!search) dispatch(restartPokemon())
-     dispatch(searchPokemon(search));
+    dispatch(searchPokemon(search,history));
 }
 
 const handleChange = (e) =>{

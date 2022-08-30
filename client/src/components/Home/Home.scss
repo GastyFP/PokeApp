@@ -12,3 +12,20 @@
     align-items: center;
     justify-content: center;
   }
+
+.pagination-container{
+    display: flex;
+    flex-direction: row;
+    max-width: 100%;
+    position: static;
+}
+
+.pagination-btn button{
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: none;
+  color: #fff;
+  background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+    background-origin: border-box;
+}

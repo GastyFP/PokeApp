@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import './PokemonDetail.scss';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getPokemonDetail } from "../../redux/actions";
+import { getPokemonDetail, restartDetail } from "../../redux/actions";
 import DetailSpinner from "../DetailSpinner/DetailSpinner";
 
 //im doing conditional rendering because of the "type" property.
@@ -15,9 +15,14 @@ const PokemonDetail = () =>{
 
     useEffect(() => {
       dispatch(getPokemonDetail(id))
+      return ()=>{
+        dispatch(restartDetail())
+      }
     }, [dispatch,id])
+
+    
     let pokemon = useSelector((state)=>state.pokemonDetail)
-         console.log(pokemon)
+        //  console.log(pokemon)
     return(
         pokemon.name ?
     <div className={`detail-container ${pokemon.created ? pokemon.types.map(t=>t.name):pokemon.type[0].name}`} >
@@ -44,19 +49,7 @@ const PokemonDetail = () =>{
             </div>
         </div>
     </div>: <DetailSpinner/>
-
-
     )
-
-
-
-
-
-
-
-
-
-
 }
 
 export default PokemonDetail

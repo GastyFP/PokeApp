@@ -3,7 +3,11 @@ import './PageNotFound.scss'
 
 const PageNotFound = () => {
   return (
-    <div><h1>Pokemon Not Found</h1></div>
+    <div style={{display:'flex',flexDirection:'column',alignItems: 'center'}}>
+      <h1>Sorry, Pokemon not found</h1>
+      <img  src="https://c.tenor.com/J6lraJXFl4IAAAAC/pokemon-pikachu.gif" alt="sorry" />
+    </div>
+
   )
 }
 
