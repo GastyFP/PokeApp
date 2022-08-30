@@ -100,7 +100,8 @@ const CreatePokemon = () => {
         let objError = validate({...newPokemon,[e.target.name]:e.target.value});
         setErrors(objError);
     }
-
+    
+    console.log(newPokemon)
     function handleSubmit(e){
         e.preventDefault();
         setnewPokemon({
@@ -117,31 +118,31 @@ const CreatePokemon = () => {
         <h5>Create your own Pokemon! </h5>
         <form onSubmit={handleSubmit}>
             <label>Name:</label>
-            <input type="text" name="name" id="name" value={newPokemon.name} onChange={(e)=>handleChange(e)} />
+            <input type="text" name="name" id="name" value={newPokemon.name} onChange={handleChange} />
                 {errors.name && <span style={{color:'red'}} >{errors.name}</span>}
                 <br />
             <label>Health:</label>
-            <input type="number" name="hp" id="hp" value={newPokemon.hp} onChange={(e)=>handleChange(e)} />
+            <input type="number" name="hp" id="hp" value={newPokemon.hp} onChange={handleChange} />
                 {errors.hp && <span style={{color:'red'}} >{errors.hp}</span>}
                 <br />
             <label>Attack:</label>
-            <input type="number" name="atk" id="atk" value={newPokemon.atk} onChange={(e)=>handleChange(e)} />
+            <input type="number" name="atk" id="atk" value={newPokemon.atk} onChange={handleChange} />
                 {errors.atk && <span style={{color:'red'}} >{errors.atk}</span>}
                 <br />
             <label>Defense:</label>
-            <input type="number" name="def" id="def" value={newPokemon.def} onChange={(e)=>handleChange(e)} />
+            <input type="number" name="def" id="def" value={newPokemon.def} onChange={handleChange} />
                 {errors.def && <span style={{color:'red'}} >{errors.def}</span>}
                 <br />
             <label>Speed:</label>
-            <input type="number" name="spd" id="spd" value={newPokemon.spd} onChange={(e)=>handleChange(e)} />
+            <input type="number" name="spd" id="spd" value={newPokemon.spd} onChange={handleChange} />
                 {errors.spd && <span style={{color:'red'}} >{errors.spd}</span>}
                 <br />
             <label>Height:</label>
-            <input type="number" name="height" id="height" value={newPokemon.height} onChange={(e)=>handleChange(e)} />
+            <input type="number" name="height" id="height" value={newPokemon.height} onChange={handleChange} />
                 {errors.height && <span style={{color:'red'}} >{errors.height}</span>}
                 <br />
             <label>Weight:</label>
-            <input type="number" name="weight" id="weight" value={newPokemon.weight} onChange={(e)=>handleChange(e)} />
+            <input type="number" name="weight" id="weight" value={newPokemon.weight} onChange={handleChange} />
                 {errors.weight && <span style={{color:'red'}} >{errors.weight}</span>}
             <br /><br />
             <label>Select up to 2 types!</label>
@@ -166,7 +167,7 @@ const CreatePokemon = () => {
             <br /><br />
             <label>Select an image for your pokemon via URL!</label>
             <p style={{fontSize: '13px', color: 'blue'}}>Copy the link of an image you like here! Be sure the link is correct, otherwise it wont work :S </p>
-            <input type="text" name='image'id='image'placeholder='Paste URL here...' onChange={(e)=>handleChange(e)} />
+            <input type="text" name='image'id='image'placeholder='Paste URL here...' onChange={handleChange} />
             <br />
             <button className='createBtn' disabled={newPokemon.name ? Object.keys(errors).length > 0 ? true : false: true} type="submit">Create Pokemon!</button>
         </form>
