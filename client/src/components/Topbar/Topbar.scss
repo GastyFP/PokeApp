@@ -2,7 +2,8 @@
 .topbar{
     width: 100%;
     height: 100px;
-    background-color: gray;
+    background-color: #CD5C5C;
+    border: solid 2px;
     top: 0;
     z-index: 3;
     display: flex;
@@ -37,10 +38,10 @@
         justify-content: center;
         padding: 0.5rem;
         background-color: white;
-        border: none;
+        border: solid 2px;
         transition: 0.2s;
         margin-right: 1rem;
-        border-radius: 5px;
+        border-radius: 10px;
         cursor: pointer;
         
         &.create{
@@ -61,17 +62,19 @@
         border-radius: 7px;
         align-items: center;
         margin-left: 20px;
+        border: solid 2px;
     }
 
     .filter-container{
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
-        width: 200px;
-        height: 90px;
+        width: 180px;
+        height: 85px;
         background-color: lightgray;
         border-radius: 7px;
         align-items: center;
         margin-left: 20px;
+        border: solid 2px;
     }
 

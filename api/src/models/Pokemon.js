@@ -40,7 +40,7 @@ module.exports = (sequelize) => {
     },
     created:{
       type: DataTypes.BOOLEAN,
-      defaultValue: true      //filtrado para creados y no creados
+      defaultValue: true      //filter 4 created
     },
     image:{
       type: DataTypes.STRING,

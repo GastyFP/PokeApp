@@ -71,7 +71,7 @@ router.post('/',async (req,res, next)=>{
         const new_pokemon = await Pokemons.create(req.body);
 
         //Once i got UUIDV4, i add the types
-        const result = await new_pokemon.setTypes(typeId) // *GUARDA ACA CUANDO CREO EL FORM*
+        const result = await new_pokemon.setTypes(typeId) //this might be a bad practice...
 
         // return res.status(201).json(new_pokemon);
         return res.status(201).json(result);

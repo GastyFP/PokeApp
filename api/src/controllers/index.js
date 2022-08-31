@@ -7,8 +7,6 @@ const getPokemons = async ()=>{
         let pag2 = await axios.get(pag1.data.next);
         let pokeUrls = [...pag1.data.results,...pag2.data.results];
 
-        // const {data} = await axios.get('https://pokeapi.co/api/v2/pokemon');
-
         const pokePromises = pokeUrls.map(p=>axios.get(p.url))
         //console.log(pokePromises)
         let pokemonApi = Promise.all(pokePromises)//devuelve un array con cada promesa

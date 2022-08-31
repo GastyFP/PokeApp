@@ -49,6 +49,7 @@ export default function reducer(state = initialState , action){
 
         case FILTER_BY_TYPE:{
             //issues with types when created / type when comes from API
+            //is pkmn created? ok, then its "types". if length > 1 check type1 or type2 for filter
             return{
                 ...state,
                 filtered_pokemons: state.pokemons.filter(p=>

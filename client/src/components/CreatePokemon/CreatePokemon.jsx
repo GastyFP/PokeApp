@@ -3,7 +3,62 @@ import React, {useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { postPokemon } from '../../redux/actions';
 import DetailSpinner from "../../components/DetailSpinner/DetailSpinner";
-// import { DEFAULT_CARD_IMG } from '../../constantes';
+
+
+
+///*******************VALIDATE FUNCTION *******************************/
+const validate = (pokemon)=>{
+    let errors = {}
+    // console.log('VALIDATE',pokemon)
+    if(!pokemon.name){
+        errors.name = 'Name is required'
+    }else{
+        if(!/^[a-zA-Z]+$/g.test(pokemon.name)){
+            errors.name = 'Only letters are valid'
+        }else{
+            if(!/^.{3,13}$/.test(pokemon.name)){
+                errors.name = 'Min 3 letters, Max is 13'
+            }
+        }
+    }
+    if(!pokemon.hp){
+        errors.hp = 'Health must be at least 1'
+    }else if(!/^[1-9].{0,2}$/.test(pokemon.hp)){
+    errors.hp = ' Health must be a positive number between 1 and 999'
+    }
+    if(!pokemon.atk){
+            errors.atk = 'Attack must be at least 1'
+    }else if(!/^[1-9].{0,2}$/.test(pokemon.atk)){
+        errors.atk = ' Attack must be a positive number between 1 and 999'
+    }
+    if(!pokemon.def){
+        errors.def = 'Defense must be at least 1'
+    }else if(!/^[1-9].{0,2}$/.test(pokemon.def)){
+    errors.def = ' Defense must be a positive number between 1 and 999'
+    }
+    if(!pokemon.spd){
+        errors.spd = 'Speed must be at least 1'
+    }else if(!/^[1-9].{0,2}$/.test(pokemon.spd)){
+    errors.spd = ' Speed must be a positive number between 1 and 999'
+    }
+    if(!pokemon.height){
+        errors.height = 'Height must be at least 1'
+    }else if(!/^[1-9].{0,2}$/.test(pokemon.height)){
+    errors.height = ' Height must be a positive number between 1 and 999'
+    }
+    if(!pokemon.weight){
+        errors.weight = 'Weight must be at least 1'
+    }else if(!/^[1-9].{0,2}$/.test(pokemon.weight)){
+    errors.weight = ' Weight must be a positive number between 1 and 999'
+    }
+    // console.log('TYPE2',pokemon.type2)
+    if(pokemon.type2 === pokemon.type1){
+        errors.type = 'The two types must be different'
+    }
+    // console.log(errors)
+    return errors
+}
+///*******************END OF VALIDATE *******************************/
 
 const CreatePokemon = () => {
     const types = useSelector((state)=>state.types)
@@ -22,63 +77,6 @@ const CreatePokemon = () => {
         type2: 0,
         typeId: []
     })
-
-///*******************VALIDATE FUNCTION *******************************/
-
-    const validate = (pokemon)=>{
-        let errors = {}
-        // console.log('VALIDATE',pokemon)
-        if(!pokemon.name){
-            errors.name = 'Name is required'
-        }else{
-            if(!/^[a-zA-Z]+$/g.test(pokemon.name)){
-                errors.name = 'Only letters are valid'
-            }else{
-                if(!/^.{3,13}$/.test(pokemon.name)){
-                    errors.name = 'Min 3 letters, Max is 13'
-                }
-            }
-        }
-        if(!pokemon.hp){
-            errors.hp = 'Health must be at least 1'
-        }else if(!/^[1-9].{0,2}$/.test(pokemon.hp)){
-        errors.hp = ' Health must be a positive number between 1 and 999'
-        }
-        if(!pokemon.atk){
-                errors.atk = 'Attack must be at least 1'
-        }else if(!/^[1-9].{0,2}$/.test(pokemon.atk)){
-            errors.atk = ' Attack must be a positive number between 1 and 999'
-        }
-        if(!pokemon.def){
-            errors.def = 'Defense must be at least 1'
-        }else if(!/^[1-9].{0,2}$/.test(pokemon.def)){
-        errors.def = ' Defense must be a positive number between 1 and 999'
-        }
-        if(!pokemon.spd){
-            errors.spd = 'Speed must be at least 1'
-        }else if(!/^[1-9].{0,2}$/.test(pokemon.spd)){
-        errors.spd = ' Speed must be a positive number between 1 and 999'
-        }
-        if(!pokemon.height){
-            errors.height = 'Height must be at least 1'
-        }else if(!/^[1-9].{0,2}$/.test(pokemon.height)){
-        errors.height = ' Height must be a positive number between 1 and 999'
-        }
-        if(!pokemon.weight){
-            errors.weight = 'Weight must be at least 1'
-        }else if(!/^[1-9].{0,2}$/.test(pokemon.weight)){
-        errors.weight = ' Weight must be a positive number between 1 and 999'
-        }
-        // console.log('TYPE2',pokemon.type2)
-        if(pokemon.type2 === pokemon.type1){
-            errors.type = 'The two types must be different'
-        }
-        // console.log(errors)
-        return errors
-    }
-///*******************END OF VALIDATE *******************************/
-
-//*******************HANDLERS************************************* */
 
     function handleChange(e){
         setnewPokemon((newPokemon)=> {
@@ -101,7 +99,6 @@ const CreatePokemon = () => {
         setErrors(objError);
     }
     
-    console.log(newPokemon)
     function handleSubmit(e){
         e.preventDefault();
         setnewPokemon({
@@ -110,9 +107,8 @@ const CreatePokemon = () => {
         })
         dispatch(postPokemon(newPokemon))
     }
-//*******************END OF HANDLERS************************************* */
 
-  return (
+    return (
     types.length > 0 ?
     <div className='form-box'>
         <h5>Create your own Pokemon! </h5>
@@ -147,20 +143,20 @@ const CreatePokemon = () => {
             <br /><br />
             <label>Select up to 2 types!</label>
             <select name="type1" id="type1" onChange={(e)=>handleSelect(e)}>
-               {
+                {
                 types.map(t=>(
                     <option key={t.id} value={t.id} >{t.name}</option>
                 ))
-               }
+                }
             </select>
             <select name="type2" id="type2" onChange={(e)=>handleSelect(e)}>
                 <option value={0}>---</option>
-               {
+                {
                 types.map(t=>(
                     // eslint-disable-next-line
                     <option disabled={ newPokemon.type1 == 1 ? true:false} key={t.id} value={t.id}>{t.name}</option>
                 ))
-               }
+                }
             </select>
             <br />
                 {errors.type && <span style={{color:'red'}} >{errors.type}</span>}
@@ -172,7 +168,7 @@ const CreatePokemon = () => {
             <button className='createBtn' disabled={newPokemon.name ? Object.keys(errors).length > 0 ? true : false: true} type="submit">Create Pokemon!</button>
         </form>
     </div>: <DetailSpinner/>
-  )
+    )
 }
 
 export default CreatePokemon

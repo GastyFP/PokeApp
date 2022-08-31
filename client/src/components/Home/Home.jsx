@@ -46,7 +46,7 @@ const Home = () =>{
             <div className="pagination-container">
                 { 
                 <div className="pagination-btn" style={{display:'flex' ,flexDirection:'row'}} >
-                    {searched_pokemon_copy.pre_page? <button onClick={()=>{handlePagination(searched_pokemon_copy.pre_page)}}>PREVIOUS</button>:null}
+                    {searched_pokemon_copy.pre_page? <button style={{marginRight: '5px'}} onClick={()=>{handlePagination(searched_pokemon_copy.pre_page)}}>PREVIOUS</button>:null}
                     {searched_pokemon_copy.next_page ?<button onClick={()=>{handlePagination(searched_pokemon_copy.next_page)}}>NEXT</button>:null}                    
                 </div>
                 }
@@ -64,9 +64,9 @@ const Home = () =>{
     : //if u dont search, it renders all pokemons
     <div className="pokemon-conteiner">
         <div className="pagination-container">
-            { 
+            { //ternary op for pagination btns
                 <div className="pagination-btn" style={{display:'flex' ,flexDirection:'row'}}>
-                    {pokemons_copy.pre_page? <button onClick={()=>{handlePagination(pokemons_copy.pre_page)}}>PREVIOUS</button>:null}
+                    {pokemons_copy.pre_page? <button style={{marginRight: '5px'}} onClick={()=>{handlePagination(pokemons_copy.pre_page)}}>PREVIOUS</button>:null}
                     {pokemons_copy.next_page ?<button onClick={()=>{handlePagination(pokemons_copy.next_page)}}>NEXT</button>:null}                    
                 </div>
             }
