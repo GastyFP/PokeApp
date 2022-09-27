@@ -26,6 +26,7 @@ const PokeFilter = () => {
   }
 
 
+
   return (
         types.length > 0 &&
     <div className='filter-items'>

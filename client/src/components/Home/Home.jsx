@@ -27,9 +27,9 @@ const Home = () =>{
     pokemons_copy = paginator(pokemons,pag,12)
     searched_pokemon_copy = paginator(searched_pokemon,pag,12)
 
-   const handlePagination = (pag)=>{
+    const handlePagination = (pag)=>{
     dispatch(pagChange(pag))
-   }
+    }
 
 /*****************END OF PAGINATION****************************** */
 
@@ -46,18 +46,18 @@ const Home = () =>{
             <div className="pagination-container">
                 { 
                 <div className="pagination-btn" style={{display:'flex' ,flexDirection:'row'}} >
-                    {searched_pokemon_copy.pre_page? <button style={{marginRight: '5px'}} onClick={()=>{handlePagination(searched_pokemon_copy.pre_page)}}>PREVIOUS</button>:null}
-                    {searched_pokemon_copy.next_page ?<button onClick={()=>{handlePagination(searched_pokemon_copy.next_page)}}>NEXT</button>:null}                    
+                    {searched_pokemon_copy.pre_page? <button style={{marginRight: '5px'}} onClick={()=>{handlePagination(searched_pokemon_copy.pre_page)}}>Prev Page</button>:null}
+                    {searched_pokemon_copy.next_page ?<button onClick={()=>{handlePagination(searched_pokemon_copy.next_page)}}>Next Page</button>:null}                    
                 </div>
                 }
             </div>
         <div className="all-container">
             {
-               searched_pokemon_copy.data.map(p=>(
+                searched_pokemon_copy.data.map(p=>(
                 p.created ?
                 <PokemonCard key={p.id} id={p.id} image={p.image} name={p.name} type={p.types.map(t=>t.name)} />:
                 <PokemonCard key={p.id} id={p.id} image={p.image} name={p.name} type={p.type.map(t=>t.name)} />
-               )) 
+                )) 
             }
         </div>
     </div>
@@ -66,8 +66,8 @@ const Home = () =>{
         <div className="pagination-container">
             { //ternary op for pagination btns
                 <div className="pagination-btn" style={{display:'flex' ,flexDirection:'row'}}>
-                    {pokemons_copy.pre_page? <button style={{marginRight: '5px'}} onClick={()=>{handlePagination(pokemons_copy.pre_page)}}>PREVIOUS</button>:null}
-                    {pokemons_copy.next_page ?<button onClick={()=>{handlePagination(pokemons_copy.next_page)}}>NEXT</button>:null}                    
+                    {pokemons_copy.pre_page? <button style={{marginRight: '5px'}} onClick={()=>{handlePagination(pokemons_copy.pre_page)}}>Prev Page</button>:null}
+                    {pokemons_copy.next_page ?<button onClick={()=>{handlePagination(pokemons_copy.next_page)}}>Next Page</button>:null}                    
                 </div>
             }
         </div>

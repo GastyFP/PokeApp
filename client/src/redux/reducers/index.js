@@ -76,7 +76,6 @@ export default function reducer(state = initialState , action){
                 filtered_pokemons: state.pokemons.filter(p=> p.created !== true)
             }
         }
-
         
         case SORT_ALPHABETICAL:{
             let ordered_pokemons = [...state.pokemons]
