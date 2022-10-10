@@ -14,11 +14,11 @@ export const SORT_BY_ATTACK = 'SORT_BY_ATTACK';
 export const PAGINATION_RESET = 'PAGINATION_RESET';
 export const PAGINATION_CHANGE = 'PAGINATION_CHANGE';
 
-
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
 export const getPokemons = () =>{
     return function (dispatch){
-        axios.get('http://localhost:3001/api/pokemons')
+        axios.get(`${REACT_APP_API_URL}/api/pokemons`)
         .then(pokemons=>{
             dispatch({
                 type: GET_POKEMONS,
@@ -32,7 +32,7 @@ export const getPokemons = () =>{
 }
 export const getPokemonDetail = (ID) =>{
     return function (dispatch){
-        axios.get(`http://localhost:3001/api/pokemons/${ID}`)
+        axios.get(`${REACT_APP_API_URL}/api/pokemons/${ID}`)
         .then(pokemons=>{
             dispatch({
                 type: GET_POKEMON_DETAIL,
@@ -46,7 +46,7 @@ export const getPokemonDetail = (ID) =>{
 }
 export const searchPokemon = (name,history) =>{
     return function (dispatch){
-        axios.get(`http://localhost:3001/api/pokemons?name=${name}`)
+        axios.get(`${REACT_APP_API_URL}/api/pokemons?name=${name}`)
         .then(pokemons=>{
             dispatch({
                 type: SEARCH_POKEMON,
@@ -62,7 +62,7 @@ export const searchPokemon = (name,history) =>{
 
 export const getTypes = ()=>{
     return function (dispatch){
-        axios.get(`http://localhost:3001/api/types`)
+        axios.get(`${REACT_APP_API_URL}/api/types`)
         .then(types =>{
             dispatch({
                 type: GET_TYPES,
@@ -103,7 +103,7 @@ export const postPokemon = (pokemon) =>{
     // console.log('ACTIONS post IF',ids)
 
     return function(){
-        axios.post(`http://localhost:3001/api/pokemons`,{
+        axios.post(`${REACT_APP_API_URL}/api/pokemons`,{
             name: pokemon.name,
             hp: pokemon.hp,
             atk: pokemon.atk,
