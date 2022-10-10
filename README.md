@@ -5,7 +5,7 @@
 ## Proyect
 
 This is a Single Page App i made in the [SoyHenry](https://www.soyhenry.com/) Bootcamp.
-The objective of this proyect was to build an App using React, Redux, Node y Sequelize.
+The objective of this proyect was to build an App using React, Redux, Node and Sequelize.
 
 the versions that i could use were:
 - __Node__: 12.18.3 or gt
@@ -21,7 +21,7 @@ Content was created with Create React App
 
 ## General Idea
 
-The general idea was to create an application that you could see the different pokemon that exist using an external API [pokeapi](https://pokeapi.co/) and also filter/ order them, create new ones and finally search for some pokemon
+Create an application that you could see the different pokemon that exist using an external API [pokeapi](https://pokeapi.co/) and also filter/ order them, create new ones and finally search for some pokemon
 
 ### The only endpoints i could use were
 
