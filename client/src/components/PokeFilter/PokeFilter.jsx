@@ -28,7 +28,7 @@ const PokeFilter = () => {
 
 
   return (
-        types && types.length > 0 ?
+        types.length > 0 &&
     <div className='filter-items'>
       <div className="filter-created">
         <label>Filter by: </label>
@@ -45,7 +45,7 @@ const PokeFilter = () => {
             }
         </select>
       </div>
-    </div>: null
+    </div>
   )
 }
 
