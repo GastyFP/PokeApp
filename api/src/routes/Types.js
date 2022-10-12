@@ -28,7 +28,7 @@ router.get('/', async (req,res,next)=>{
             //  console.log(result)
             return res.status(200).send(result)
         }else{//YES
-            return res.status(304).send(loaded)
+            return res.status(201).send(loaded)
         } 
     }catch(err){
         next(err)
