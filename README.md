@@ -7,6 +7,9 @@
 This is a Single Page App i made in the [SoyHenry](https://www.soyhenry.com/) Bootcamp.
 The objective of this proyect was to build an App using React, Redux, Node and Sequelize.
 
+![pokemon](https://user-images.githubusercontent.com/61922413/195232527-adcbd954-6b57-4225-9067-a72acbee90db.png)
+
+
 the versions that i could use were:
 - __Node__: 12.18.3 or gt
 - __NPM__: 6.14.16 or gt
