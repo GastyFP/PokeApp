@@ -28,7 +28,7 @@ Content was created with Create React App
 
 ## General Idea
 
-Create an application that you could see the different pokemon that exist using an external API [pokeapi](https://pokeapi.co/) and also filter/ order them, create new ones and finally search for some pokemon
+Create an application in which you could see the different pokemon that exist using an external API [pokeapi](https://pokeapi.co/) and also filter/ order them, create new ones and finally search for some pokemon
 
 ### The only endpoints i could use were
 
